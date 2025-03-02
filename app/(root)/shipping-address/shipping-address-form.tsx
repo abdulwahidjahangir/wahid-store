@@ -23,7 +23,7 @@ import { updateUserAddress } from "@/lib/actions/user.actions";
 
 const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
   const router = useRouter();
-  const [isPendind, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof shippingAddressSchema>>({
     resolver: zodResolver(shippingAddressSchema),
@@ -171,8 +171,8 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
               />
             </div>
             <div className="flex gap-2">
-              <Button type="submit" disabled={isPendind} className="w-full">
-                {isPendind ? (
+              <Button type="submit" disabled={isPending} className="w-full">
+                {isPending ? (
                   <Loader className="w-4 h-4 animate-spin" />
                 ) : (
                   <ArrowRight className="h-4 w-4" />
