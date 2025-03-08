@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllProducts } from "@/lib/actions/product.action";
+import { getAllProducts, deleteProduct } from "@/lib/actions/product.action";
 import { formatCurrency, formatId } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,10 +12,14 @@ import {
 } from "@/components/ui/table";
 import { Edit } from "lucide-react";
 import Pagination from "@/components/shared/pagination";
+import { requireAdmin } from "@/lib/auth-guard";
+import DeleteDialog from "@/components/shared/delete-dialog";
 
 const AdminProductsPage = async (props: {
   searchParams: Promise<{ page: string; query: string; category: string }>;
 }) => {
+  await requireAdmin();
+
   const searchParams = await props.searchParams;
 
   const page = Number(searchParams.page) || 1;
@@ -64,7 +68,7 @@ const AdminProductsPage = async (props: {
                     <Edit />
                   </Link>
                 </Button>
-                <Button variant="destructive"> </Button>
+                <DeleteDialog id={product.id} action={deleteProduct} />
               </TableCell>
             </TableRow>
           ))}
