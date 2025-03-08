@@ -112,3 +112,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+/*Uplaod thing button text override*/
+html.dark .upload-field .text-white{
+  color: #ffffff !important;
+}
+
+html .upload-field .text-white{
+  color: #000000 !important;
+}

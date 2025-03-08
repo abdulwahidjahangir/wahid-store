@@ -3,9 +3,8 @@
 import { prisma } from "@/db/prisma";
 import { convertToPlainObject, formatError } from "../utils";
 import { LATEST_PRODUCTS_LIMIT, PAGE_SIZE } from "../constants";
-import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
-import { insertProductsSchema, updateProductSchema } from "../validator";
+import { insertProductSchema, updateProductSchema } from "../validator";
 import { z } from "zod";
 
 // Get latest products
@@ -42,6 +41,7 @@ export async function getAllProducts({
   const data = await prisma.product.findMany({
     skip: (page - 1) * limit,
     take: limit,
+    orderBy: { createdAt: "desc" },
   });
 
   const dataCounts = await prisma.product.count();
@@ -55,12 +55,6 @@ export async function getAllProducts({
 // DELETE a product
 export async function deleteProduct(id: string) {
   try {
-    const session = await auth();
-
-    if (session?.user?.role !== "admin") {
-      throw new Error("You are not authorized to perform this taks");
-    }
-
     const productExists = await prisma.product.findFirst({
       where: { id: id },
     });
@@ -82,17 +76,9 @@ export async function deleteProduct(id: string) {
 }
 
 // CREATE a product
-export async function createProduct(
-  data: z.infer<typeof insertProductsSchema>
-) {
+export async function createProduct(data: z.infer<typeof insertProductSchema>) {
   try {
-    const session = await auth();
-
-    if (session?.user?.role !== "admin") {
-      throw new Error("You are not authorized to perform this taks");
-    }
-
-    const product = insertProductsSchema.parse(data);
+    const product = insertProductSchema.parse(data);
 
     await prisma.product.create({
       data: product,
@@ -109,12 +95,6 @@ export async function createProduct(
 // Update a product
 export async function updateProduct(data: z.infer<typeof updateProductSchema>) {
   try {
-    const session = await auth();
-
-    if (session?.user?.role !== "admin") {
-      throw new Error("You are not authorized to perform this taks");
-    }
-
     const product = updateProductSchema.parse(data);
     const productExists = await prisma.product.findFirst({
       where: { id: product.id },
