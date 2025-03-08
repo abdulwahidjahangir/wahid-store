@@ -10,7 +10,7 @@ const currency = z
   );
 
 // Schema for inserting products
-export const inserProductsSchema = z.object({
+export const insertProductsSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
   slug: z.string().min(3, "Slug must be at least 3 characters"),
   category: z.string().min(3, "Category must be at least 3 characters"),
@@ -21,6 +21,11 @@ export const inserProductsSchema = z.object({
   isFeatured: z.boolean(),
   banner: z.string().nullable(),
   price: currency,
+});
+
+// Schema fopr updating products
+export const updateProductSchema = insertProductsSchema.extend({
+  id: z.string().min(1, "Product ID is required"),
 });
 
 // Schema for signing users in
