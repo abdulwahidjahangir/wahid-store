@@ -17,11 +17,20 @@ export async function getLatestProducts() {
   return convertToPlainObject(data);
 }
 
-// GET single product by it's action
+// GET single product by it's slug
 export async function getProductBySlug(slug: string) {
   return await prisma.product.findFirst({
     where: { slug: slug },
   });
+}
+
+// GET single product by it's action
+export async function getProductById(productId: string) {
+  const data = await prisma.product.findFirst({
+    where: { id: productId },
+  });
+  
+  return convertToPlainObject(data);
 }
 
 // GET all products
