@@ -3,6 +3,7 @@ import Link from "next/link";
 import { APP_NAME } from "@/lib/constants";
 import Menu from "./menu";
 import CategoryDrawer from "./category-drawer";
+import SearchComponent from "./search-component";
 
 const Header = () => {
   return (
@@ -23,9 +24,10 @@ const Header = () => {
             </span>
           </Link>
         </div>
-        <div className="space-x-2">
-          <Menu />
+        <div className="hidden md:block">
+          <SearchComponent />
         </div>
+        <Menu />
       </div>
     </header>
   );
