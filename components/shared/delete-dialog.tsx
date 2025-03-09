@@ -14,7 +14,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { Loader } from "lucide-react";
+import { CircleX, Loader } from "lucide-react";
 
 const DeleteDialog = ({
   id,
@@ -43,7 +43,7 @@ const DeleteDialog = ({
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button size="sm" variant="destructive" className="ml-2">
-          Delete
+          <CircleX />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

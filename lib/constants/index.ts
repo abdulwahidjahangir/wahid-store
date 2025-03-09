@@ -22,7 +22,7 @@ export const signUpDefaultValues = {
 };
 
 export const PAYMENT_METHODS = process.env.PAYMENT_METHODS
-  ? process.env.PAYMENT_METHODS.split(",")
+  ? process.env.PAYMENT_METHODS.split(", ")
   : ["PayPal", "Stripe", "CashOnDelivery"];
 
 export const DEFAULT_PAYMENT_METHOD =
@@ -44,3 +44,7 @@ export const productDefaultValues = {
   isFeatured: false,
   banner: null,
 };
+
+export const USER_ROLES = process.env.USER_ROLES
+  ? process.env.USER_ROLES.split(", ")
+  : ["admin", "user"];

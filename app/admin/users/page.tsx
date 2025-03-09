@@ -15,6 +15,7 @@ import Link from "next/link";
 import DeleteDialog from "@/components/shared/delete-dialog";
 import Pagination from "@/components/shared/pagination";
 import { Badge } from "@/components/ui/badge";
+import { Edit } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Users",
@@ -59,7 +60,9 @@ const AdminUserPage = async (props: {
 
                 <TableCell>
                   <Button asChild variant="outline" size="sm">
-                    <Link href={`/admin/users/${user.id}`}>Details</Link>
+                    <Link href={`/admin/users/${user.id}`}>
+                      <Edit />
+                    </Link>
                   </Button>
                   <DeleteDialog id={user.id} action={deleteUser} />
                 </TableCell>
