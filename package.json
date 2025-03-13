@@ -9,9 +9,8 @@
     "lint": "next lint",
     "postinstall": "prisma generate",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "email": "cpx .env node_modules/react-email && email dev --dir email --port 3001"
-  },
+    "test:watch": "jest --watch"
+    },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
     "@hookform/resolvers": "^4.1.2",
