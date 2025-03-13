@@ -284,7 +284,7 @@ const OrderDetailsTable = ({
                 </>
               )}
               {/* Delivered */}
-              {isAdmin && isPaid && (
+              {isAdmin && isDelivered && (
                 <>
                   <MarkAsDeliveredButton />
                 </>
